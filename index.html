@@ -8,169 +8,183 @@
         :root {
             --bg: #0f172a;
             --panel: #1e293b;
+            --primary: #2563eb;
             --accent: #f59e0b;
             --text: #f8fafc;
             --subtext: #94a3b8;
             --border: #334155;
             --success: #10b981;
+            --danger: #ef4444;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
         }
 
-        header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-bottom: 2px solid var(--accent);
-            padding: 1rem;
-            text-align: center;
+        header { 
+            background: linear-gradient(135deg, #1e293b, #0f172a); 
+            border-bottom: 2px solid var(--accent); 
+            padding: 1rem; 
+            text-align: center; 
         }
 
-        h1 {
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
+        h1 { 
+            color: var(--accent); 
+            font-size: 1.5rem; 
+            margin-bottom: 0.25rem; 
         }
 
-        .subtitle {
-            color: var(--subtext);
-            font-size: 0.85rem;
+        .subtitle { 
+            color: var(--subtext); 
+            font-size: 0.85rem; 
         }
 
-        nav {
-            display: flex;
-            background: var(--panel);
-            overflow-x: auto;
-            border-bottom: 1px solid var(--border);
+        nav { 
+            display: flex; 
+            background: var(--panel); 
+            overflow-x: auto; 
+            border-bottom: 1px solid var(--border); 
         }
 
-        nav button {
-            flex: 1;
-            min-width: 90px;
-            padding: 0.75rem 0.5rem;
-            background: none;
-            border: none;
-            color: var(--subtext);
-            font-size: 0.85rem;
-            font-weight: bold;
-            cursor: pointer;
-            white-space: nowrap;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
+        nav button { 
+            flex: 1; 
+            min-width: 90px; 
+            padding: 0.75rem 0.5rem; 
+            background: none; 
+            border: none; 
+            color: var(--subtext); 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            white-space: nowrap; 
+            border-bottom: 3px solid transparent; 
+            transition: all 0.2s; 
         }
 
-        nav button.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-            background: rgba(245, 158, 11, 0.05);
+        nav button.active { 
+            color: var(--accent); 
+            border-bottom-color: var(--accent); 
+            background: rgba(245, 158, 11, 0.05); 
         }
 
-        main {
-            flex: 1;
-            padding: 1rem;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
+        main { 
+            flex: 1; 
+            padding: 1rem; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            width: 100%; 
         }
 
-        .tab-content {
-            display: none;
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .card { 
+            background: var(--panel); 
+            border-radius: 8px; 
+            padding: 1rem; 
+            margin-bottom: 1rem; 
+            border: 1px solid var(--border); 
         }
 
-        .tab-content.active {
-            display: block;
+        .card-title { 
+            font-size: 1.1rem; 
+            color: var(--accent); 
+            margin-bottom: 1rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
         }
 
-        .card {
-            background: var(--panel);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border);
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.85rem; 
+            text-align: center; 
         }
 
-        .card-title {
-            font-size: 1.1rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        th, td { 
+            padding: 0.6rem 0.4rem; 
+            border-bottom: 1px solid var(--border); 
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            text-align: center;
+        th { 
+            background: #0f172a; 
+            color: var(--subtext); 
         }
 
-        th, td {
-            padding: 0.6rem 0.4rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: #0f172a;
-            color: var(--subtext);
-        }
-
-        .match-card {
-            background: #0f172a;
+        .round-header {
+            background: rgba(37, 99, 235, 0.15);
+            color: #60a5fa;
+            padding: 0.5rem 0.75rem;
             border-radius: 6px;
-            padding: 0.75rem;
-            margin-bottom: 0.75rem;
-            border: 1px solid var(--border);
-        }
-
-        .match-teams {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            margin: 1rem 0 0.5rem 0;
+            border-right: 4px solid var(--primary);
         }
 
-        .match-score-display {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--accent);
-            background: var(--panel);
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            width: fit-content;
-            margin: 0 auto;
+        .match-card { 
+            background: #0f172a; 
+            border-radius: 6px; 
+            padding: 0.75rem; 
+            margin-bottom: 0.75rem; 
+            border: 1px solid var(--border); 
         }
 
-        .match-referee {
-            font-size: 0.75rem;
-            color: var(--subtext);
-            margin-top: 0.5rem;
-            text-align: center;
+        .match-teams { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-weight: bold; 
+            margin-bottom: 0.5rem; 
         }
 
-        .rule-item {
-            background: #0f172a;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-            border-right: 3px solid var(--accent);
-            font-size: 0.85rem;
+        .match-score-display { 
+            display: flex; 
+            gap: 1rem; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: var(--accent); 
+            background: var(--panel); 
+            padding: 0.4rem 1rem; 
+            border-radius: 6px; 
+            width: fit-content; 
+            margin: 0 auto 0.5rem auto; 
+        }
+
+        .match-time { 
+            font-size: 0.8rem; 
+            color: #60a5fa; 
+            text-align: center; 
+            margin-bottom: 0.3rem; 
+        }
+
+        .match-referee { 
+            font-size: 0.75rem; 
+            color: var(--subtext); 
+            text-align: center; 
+        }
+
+        .rule-item { 
+            background: #0f172a; 
+            padding: 0.75rem; 
+            border-radius: 6px; 
+            margin-bottom: 0.5rem; 
+            border-right: 3px solid var(--accent); 
+            font-size: 0.85rem; 
             line-height: 1.5;
         }
     </style>
@@ -179,21 +193,21 @@
 
     <header>
         <h1>🏆 دوري النخبة</h1>
-        <div class="subtitle">جدول الترتيب والمباريات والهدافين (نسخة المتابعة)</div>
+        <div class="subtitle">جدول الترتيب والمباريات والهدافين</div>
     </header>
 
     <nav>
-        <button class="active" onclick="switchTab('standings')">الترتيب</button>
-        <button onclick="switchTab('matches')">المباريات</button>
-        <button onclick="switchTab('scorers')">الهدافين</button>
-        <button onclick="switchTab('rules')">اللائحة والقوانين</button>
+        <button class="active" onclick="switchTab('standings', event)">الترتيب</button>
+        <button onclick="switchTab('matches', event)">المباريات</button>
+        <button onclick="switchTab('scorers', event)">الهدافين</button>
+        <button onclick="switchTab('rules', event)">اللائحة</button>
     </nav>
 
     <main>
-        <!-- TAB 1: STANDINGS -->
+        <!-- جدول الترتيب -->
         <div id="tab-standings" class="tab-content active">
             <div class="card">
-                <div class="card-title">📊 جدول ترتيب الدوري</div>
+                <div class="card-title">📊 جدول الترتيب العام</div>
                 <table>
                     <thead>
                         <tr>
@@ -214,18 +228,18 @@
             </div>
         </div>
 
-        <!-- TAB 2: MATCHES -->
+        <!-- المباريات -->
         <div id="tab-matches" class="tab-content">
             <div class="card">
-                <div class="card-title">⚽ جدول المباريات والنتائج</div>
-                <div id="matches-list"></div>
+                <div class="card-title">⚽ جدول المباريات والمواعيد</div>
+                <div id="matches-list">جاري التحميل...</div>
             </div>
         </div>
 
-        <!-- TAB 3: SCORERS -->
+        <!-- الهدافين -->
         <div id="tab-scorers" class="tab-content">
             <div class="card">
-                <div class="card-title">🥇 قائمة هدافي البطولة</div>
+                <div class="card-title">🥇 قائمة الهدافين</div>
                 <table>
                     <thead>
                         <tr>
@@ -240,22 +254,13 @@
             </div>
         </div>
 
-        <!-- TAB 4: RULES -->
+        <!-- اللائحة والقوانين -->
         <div id="tab-rules" class="tab-content">
             <div class="card">
                 <div class="card-title">📜 لائحة وتنظيمات الدوري</div>
-                <div class="rule-item">
-                    <strong>⚖️ التحكيم المحايد:</strong> يتم تعيين حكم محايد من أحد الفرق غير المشاركة في المباراة لضمان العدالة التامة.
-                </div>
-                <div class="rule-item">
-                    <strong>⏰ التأخير:</strong> مهلة الحضور للمباراة 15 دقيقة فقط. في حالة تأخر الفريق، يعتبر خاسراً بنتيجة (3-0).
-                </div>
-                <div class="rule-item">
-                    <strong>🟨 الانضباط:</strong> الاعتراض على الحكم مسموح فقط لكابتن الفريق. الاعتراض بأسلوب غير لائق يععرض اللاعب للإنذار.
-                </div>
-                <div class="rule-item">
-                    <strong>🏆 النهائي:</strong> يتأهل صاحب المركز الأول والمركز الثاني مباشرة للمباراة النهائية للمنافسة على الكأس والجوائز.
-                </div>
+                <div class="rule-item"><strong>⚖️ التحكيم المحايد:</strong> يتم تعيين حكم محايد من أحد الفرق غير المشاركة لضمان العدالة.</div>
+                <div class="rule-item"><strong>⏰ التأخير:</strong> مهلة الحضور 15 دقيقة، وإلا يعتبر الفريق خاسراً (3-0).</div>
+                <div class="rule-item"><strong>🏆 النهائي:</strong> يتأهل صاحب المركز الأول والثاني للمواجهة النهائية.</div>
             </div>
         </div>
     </main>
@@ -278,113 +283,72 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        let state = {
-            teams: [],
-            matches: [],
-            scorers: []
-        };
-
-        function loadData() {
-            const dbRef = ref(db, 'elite_league_db');
-            onValue(dbRef, (snapshot) => {
-                const saved = snapshot.val();
-                if (saved) {
-                    state = { ...state, ...saved };
-                }
-                renderAll();
-            });
-        }
-
-        window.switchTab = function(tabId) {
+        window.switchTab = function(tabId, event) {
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
             event.target.classList.add('active');
             document.getElementById('tab-' + tabId).classList.add('active');
         }
 
-        function renderMatches() {
-            const list = document.getElementById('matches-list');
-            list.innerHTML = '';
-
-            state.matches.forEach(m => {
-                const isFinal = m.type === 'final';
-                const played = m.scoreA !== '' && m.scoreB !== '';
-                const scoreText = played ? `${m.scoreA} - ${m.scoreB}` : 'لم تُتلعب بعد';
-
-                list.innerHTML += `
-                    <div class="match-card" style="${isFinal ? 'border-color:var(--accent); background:rgba(245,158,11,0.05);' : ''}">
-                        <div style="font-size:0.75rem; color:var(--accent); text-align:center; margin-bottom:0.25rem;">
-                            ${isFinal ? '🔥 المباراة النهائية 🔥' : 'مباراة رقم ' + m.id}
-                        </div>
-                        <div class="match-teams">
-                            <span style="width:40%; text-align:right;">${m.teamA}</span>
-                            <span style="color:var(--subtext); font-size:0.8rem;">VS</span>
-                            <span style="width:40%; text-align:left;">${m.teamB}</span>
-                        </div>
-                        <div class="match-score-display" style="${!played ? 'font-size:0.85rem; color:var(--subtext);' : ''}">
-                            ${scoreText}
-                        </div>
-                        <div class="match-referee">
-                            ⚖️ الحكم المحايد: <strong style="color:#fff">${m.referee}</strong>
-                        </div>
-                    </div>
-                `;
+        function formatDateTime(dtStr) {
+            if (!dtStr) return 'لم يحدد الموعد بعد';
+            const dt = new Date(dtStr);
+            if (isNaN(dt.getTime())) return dtStr;
+            return dt.toLocaleString('ar-EG', {
+                dateStyle: 'short',
+                timeStyle: 'short'
             });
         }
 
-        function renderStandings() {
-            const tbody = document.getElementById('standings-tbody');
-            tbody.innerHTML = '';
+        const dbRef = ref(db, 'elite_league_db');
+        onValue(dbRef, (snapshot) => {
+            const data = snapshot.val();
+            if (!data) return;
 
+            // 1. تحديث جدول الترتيب
+            const standingsTbody = document.getElementById('standings-tbody');
+            standingsTbody.innerHTML = '';
             let stats = {};
-            state.teams.forEach(t => {
-                stats[t] = { played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, pts: 0 };
-            });
+            if (data.teams) {
+                data.teams.forEach(t => {
+                    stats[t] = { played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, pts: 0 };
+                });
+            }
 
-            state.matches.forEach(m => {
-                if (m.type === 'group' && m.scoreA !== '' && m.scoreB !== '') {
-                    const sA = parseInt(m.scoreA);
-                    const sB = parseInt(m.scoreB);
-                    const tA = m.teamA;
-                    const tB = m.teamB;
+            if (data.matches) {
+                data.matches.forEach(m => {
+                    if (m.type === 'group' && m.scoreA !== '' && m.scoreB !== '' && m.scoreA !== undefined && m.scoreB !== undefined) {
+                        const sA = parseInt(m.scoreA);
+                        const sB = parseInt(m.scoreB);
+                        const tA = m.teamA;
+                        const tB = m.teamB;
 
-                    if (stats[tA] && stats[tB]) {
-                        stats[tA].played++;
-                        stats[tB].played++;
-                        stats[tA].gf += sA;
-                        stats[tA].ga += sB;
-                        stats[tB].gf += sB;
-                        stats[tB].ga += sA;
+                        if (stats[tA] && stats[tB]) {
+                            stats[tA].played++;
+                            stats[tB].played++;
+                            stats[tA].gf += sA; stats[tA].ga += sB;
+                            stats[tB].gf += sB; stats[tB].ga += sA;
 
-                        if (sA > sB) {
-                            stats[tA].won++;
-                            stats[tA].pts += 3;
-                            stats[tB].lost++;
-                        } else if (sB > sA) {
-                            stats[tB].won++;
-                            stats[tB].pts += 3;
-                            stats[tA].lost++;
-                        } else {
-                            stats[tA].drawn++;
-                            stats[tB].drawn++;
-                            stats[tA].pts += 1;
-                            stats[tB].pts += 1;
+                            if (sA > sB) {
+                                stats[tA].won++; stats[tA].pts += 3; stats[tB].lost++;
+                            } else if (sB > sA) {
+                                stats[tB].won++; stats[tB].pts += 3; stats[tA].lost++;
+                            } else {
+                                stats[tA].drawn++; stats[tA].pts += 1;
+                                stats[tB].drawn++; stats[tB].pts += 1;
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
 
-            let sorted = Object.keys(stats).map(name => ({
-                name,
-                ...stats[name],
-                gd: stats[name].gf - stats[name].ga
+            let sortedTeams = Object.keys(stats).map(name => ({
+                name, ...stats[name], gd: stats[name].gf - stats[name].ga
             }));
+            sortedTeams.sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf);
 
-            sorted.sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf);
-
-            sorted.forEach((team, idx) => {
-                tbody.innerHTML += `
+            sortedTeams.forEach((team, idx) => {
+                standingsTbody.innerHTML += `
                     <tr>
                         <td><strong>${idx + 1}</strong></td>
                         <td style="text-align:right; font-weight:bold;">${team.name}</td>
@@ -394,43 +358,68 @@
                         <td>${team.lost}</td>
                         <td>${team.gf}</td>
                         <td>${team.ga}</td>
-                        <td style="color:${team.gd > 0 ? 'var(--success)' : team.gd < 0 ? '#ef4444' : ''}">${team.gd}</td>
+                        <td style="color:${team.gd > 0 ? 'var(--success)' : team.gd < 0 ? 'var(--danger)' : ''}">${team.gd}</td>
                         <td style="color:var(--accent); font-weight:bold;">${team.pts}</td>
                     </tr>
                 `;
             });
-        }
 
-        function renderScorers() {
-            const tbody = document.getElementById('scorers-tbody');
-            tbody.innerHTML = '';
+            // 2. تحديث جدول المباريات
+            const matchesList = document.getElementById('matches-list');
+            matchesList.innerHTML = '';
+            if (!data.matches || data.matches.length === 0) {
+                matchesList.innerHTML = `<div style="text-align:center; color:var(--subtext);">لا توجد مباريات مسجلة</div>`;
+            } else {
+                let currentRound = 0;
+                data.matches.forEach(m => {
+                    const isFinal = m.type === 'final';
+                    const played = m.scoreA !== '' && m.scoreB !== '' && m.scoreA !== undefined && m.scoreB !== undefined;
+                    const scoreText = played ? `${m.scoreA} - ${m.scoreB}` : 'VS';
 
-            if (state.scorers.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" style="color:var(--subtext)">لا يوجد هدافين مسجلين حتى الآن</td></tr>`;
-                return;
+                    if (!isFinal && m.round && m.round !== currentRound) {
+                        currentRound = m.round;
+                        matchesList.innerHTML += `<div class="round-header">📌 الجولة ${currentRound}</div>`;
+                    } else if (isFinal && currentRound !== 6) {
+                        currentRound = 6;
+                        matchesList.innerHTML += `<div class="round-header" style="background:rgba(245,158,11,0.2); color:var(--accent); border-color:var(--accent);">🏆 المباراة النهائية</div>`;
+                    }
+
+                    matchesList.innerHTML += `
+                        <div class="match-card" style="${isFinal ? 'border-color:var(--accent); background:rgba(245,158,11,0.05);' : ''}">
+                            <div style="font-size:0.75rem; color:var(--accent); text-align:center; margin-bottom:0.25rem;">
+                                ${isFinal ? '🔥 النهائي 🔥' : 'مباراة رقم ' + m.id}
+                            </div>
+                            <div class="match-teams">
+                                <span>${m.teamA}</span>
+                                <span style="color:var(--accent); font-size:1.2rem;">${scoreText}</span>
+                                <span>${m.teamB}</span>
+                            </div>
+                            <div class="match-time">📅 الموعد: <strong>${formatDateTime(m.datetime || m.matchTime)}</strong></div>
+                            <div class="match-referee">⚖️ الحكم المحايد: <strong style="color:#fff">${m.referee || 'يحدد لاحقاً'}</strong></div>
+                        </div>
+                    `;
+                });
             }
 
-            state.scorers.sort((a, b) => b.goals - a.goals);
-
-            state.scorers.forEach((s, i) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>${i + 1}</strong></td>
-                        <td style="text-align:right; font-weight:bold;">${s.name}</td>
-                        <td>${s.team}</td>
-                        <td style="color:var(--accent); font-weight:bold">${s.goals}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        function renderAll() {
-            renderMatches();
-            renderStandings();
-            renderScorers();
-        }
-
-        loadData();
+            // 3. تحديث قائمة الهدافين
+            const scorersTbody = document.getElementById('scorers-tbody');
+            scorersTbody.innerHTML = '';
+            if (!data.scorers || data.scorers.length === 0) {
+                scorersTbody.innerHTML = `<tr><td colspan="4" style="color:var(--subtext)">لا يوجد هدافين مسجلين حتى الآن</td></tr>`;
+            } else {
+                let sortedScorers = [...data.scorers].sort((a, b) => b.goals - a.goals);
+                sortedScorers.forEach((s, i) => {
+                    scorersTbody.innerHTML += `
+                        <tr>
+                            <td><strong>${i + 1}</strong></td>
+                            <td style="text-align:right; font-weight:bold;">${s.name}</td>
+                            <td>${s.team}</td>
+                            <td style="color:var(--accent); font-weight:bold">${s.goals}</td>
+                        </tr>
+                    `;
+                });
+            }
+        });
     </script>
 </body>
 </html>
