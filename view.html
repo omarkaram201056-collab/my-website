@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دوري النخبة - صفحة المتابعة</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --panel: #1e293b;
+            --accent: #f59e0b;
+            --text: #f8fafc;
+            --subtext: #94a3b8;
+            --border: #334155;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-bottom: 2px solid var(--accent);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            color: var(--subtext);
+            font-size: 0.85rem;
+        }
+
+        nav {
+            display: flex;
+            background: var(--panel);
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav button {
+            flex: 1;
+            min-width: 90px;
+            padding: 0.75rem 0.5rem;
+            background: none;
+            border: none;
+            color: var(--subtext);
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        nav button.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        main {
+            flex: 1;
+            padding: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--panel);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 0.6rem 0.4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #0f172a;
+            color: var(--subtext);
+        }
+
+        .match-card {
+            background: #0f172a;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .match-score-display {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent);
+            background: var(--panel);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .match-referee {
+            font-size: 0.75rem;
+            color: var(--subtext);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .rule-item {
+            background: #0f172a;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border-right: 3px solid var(--accent);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🏆 دوري النخبة</h1>
+        <div class="subtitle">جدول الترتيب والمباريات والهدافين (نسخة المتابعة)</div>
+    </header>
+
+    <nav>
+        <button class="active" onclick="switchTab('standings')">الترتيب</button>
+        <button onclick="switchTab('matches')">المباريات</button>
+        <button onclick="switchTab('scorers')">الهدافين</button>
+        <button onclick="switchTab('rules')">اللائحة والقوانين</button>
+    </nav>
+
+    <main>
+        <!-- TAB 1: STANDINGS -->
+        <div id="tab-standings" class="tab-content active">
+            <div class="card">
+                <div class="card-title">📊 جدول ترتيب الدوري</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="text-align:right">الفريق</th>
+                            <th>لعب</th>
+                            <th>فاز</th>
+                            <th>تعادل</th>
+                            <th>خسر</th>
+                            <th>له</th>
+                            <th>عليه</th>
+                            <th>فارق</th>
+                            <th>نقاط</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standings-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: MATCHES -->
+        <div id="tab-matches" class="tab-content">
+            <div class="card">
+                <div class="card-title">⚽ جدول المباريات والنتائج</div>
+                <div id="matches-list"></div>
+            </div>
+        </div>
+
+        <!-- TAB 3: SCORERS -->
+        <div id="tab-scorers" class="tab-content">
+            <div class="card">
+                <div class="card-title">🥇 قائمة هدافي البطولة</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="text-align:right">اللاعب</th>
+                            <th>الفريق</th>
+                            <th>الأهداف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scorers-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 4: RULES -->
+        <div id="tab-rules" class="tab-content">
+            <div class="card">
+                <div class="card-title">📜 لائحة وتنظيمات الدوري</div>
+                <div class="rule-item">
+                    <strong>⚖️ التحكيم المحايد:</strong> يتم تعيين حكم محايد من أحد الفرق غير المشاركة في المباراة لضمان العدالة التامة.
+                </div>
+                <div class="rule-item">
+                    <strong>⏰ التأخير:</strong> مهلة الحضور للمباراة 15 دقيقة فقط. في حالة تأخر الفريق، يعتبر خاسراً بنتيجة (3-0).
+                </div>
+                <div class="rule-item">
+                    <strong>🟨 الانضباط:</strong> الاعتراض على الحكم مسموح فقط لكابتن الفريق. الاعتراض بأسلوب غير لائق يععرض اللاعب للإنذار.
+                </div>
+                <div class="rule-item">
+                    <strong>🏆 النهائي:</strong> يتأهل صاحب المركز الأول والمركز الثاني مباشرة للمباراة النهائية للمنافسة على الكأس والجوائز.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC9nWCcHF1s9W2zyE5MB-Cs87AqDXp4Xus",
+            authDomain: "eliteleague-d2276.firebaseapp.com",
+            databaseURL: "https://eliteleague-d2276-default-rtdb.firebaseio.com",
+            projectId: "eliteleague-d2276",
+            storageBucket: "eliteleague-d2276.firebasestorage.app",
+            messagingSenderId: "179788467954",
+            appId: "1:179788467954:web:d17db29cb7529ad8418a6b",
+            measurementId: "G-TMENK3DY22"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let state = {
+            teams: [],
+            matches: [],
+            scorers: []
+        };
+
+        function loadData() {
+            const dbRef = ref(db, 'elite_league_db');
+            onValue(dbRef, (snapshot) => {
+                const saved = snapshot.val();
+                if (saved) {
+                    state = { ...state, ...saved };
+                }
+                renderAll();
+            });
+        }
+
+        window.switchTab = function(tabId) {
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+        }
+
+        function renderMatches() {
+            const list = document.getElementById('matches-list');
+            list.innerHTML = '';
+
+            state.matches.forEach(m => {
+                const isFinal = m.type === 'final';
+                const played = m.scoreA !== '' && m.scoreB !== '';
+                const scoreText = played ? `${m.scoreA} - ${m.scoreB}` : 'لم تُتلعب بعد';
+
+                list.innerHTML += `
+                    <div class="match-card" style="${isFinal ? 'border-color:var(--accent); background:rgba(245,158,11,0.05);' : ''}">
+                        <div style="font-size:0.75rem; color:var(--accent); text-align:center; margin-bottom:0.25rem;">
+                            ${isFinal ? '🔥 المباراة النهائية 🔥' : 'مباراة رقم ' + m.id}
+                        </div>
+                        <div class="match-teams">
+                            <span style="width:40%; text-align:right;">${m.teamA}</span>
+                            <span style="color:var(--subtext); font-size:0.8rem;">VS</span>
+                            <span style="width:40%; text-align:left;">${m.teamB}</span>
+                        </div>
+                        <div class="match-score-display" style="${!played ? 'font-size:0.85rem; color:var(--subtext);' : ''}">
+                            ${scoreText}
+                        </div>
+                        <div class="match-referee">
+                            ⚖️ الحكم المحايد: <strong style="color:#fff">${m.referee}</strong>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderStandings() {
+            const tbody = document.getElementById('standings-tbody');
+            tbody.innerHTML = '';
+
+            let stats = {};
+            state.teams.forEach(t => {
+                stats[t] = { played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, pts: 0 };
+            });
+
+            state.matches.forEach(m => {
+                if (m.type === 'group' && m.scoreA !== '' && m.scoreB !== '') {
+                    const sA = parseInt(m.scoreA);
+                    const sB = parseInt(m.scoreB);
+                    const tA = m.teamA;
+                    const tB = m.teamB;
+
+                    if (stats[tA] && stats[tB]) {
+                        stats[tA].played++;
+                        stats[tB].played++;
+                        stats[tA].gf += sA;
+                        stats[tA].ga += sB;
+                        stats[tB].gf += sB;
+                        stats[tB].ga += sA;
+
+                        if (sA > sB) {
+                            stats[tA].won++;
+                            stats[tA].pts += 3;
+                            stats[tB].lost++;
+                        } else if (sB > sA) {
+                            stats[tB].won++;
+                            stats[tB].pts += 3;
+                            stats[tA].lost++;
+                        } else {
+                            stats[tA].drawn++;
+                            stats[tB].drawn++;
+                            stats[tA].pts += 1;
+                            stats[tB].pts += 1;
+                        }
+                    }
+                }
+            });
+
+            let sorted = Object.keys(stats).map(name => ({
+                name,
+                ...stats[name],
+                gd: stats[name].gf - stats[name].ga
+            }));
+
+            sorted.sort((a, b) => b.pts - a.pts || b.gd - a.gd || b.gf - a.gf);
+
+            sorted.forEach((team, idx) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${idx + 1}</strong></td>
+                        <td style="text-align:right; font-weight:bold;">${team.name}</td>
+                        <td>${team.played}</td>
+                        <td>${team.won}</td>
+                        <td>${team.drawn}</td>
+                        <td>${team.lost}</td>
+                        <td>${team.gf}</td>
+                        <td>${team.ga}</td>
+                        <td style="color:${team.gd > 0 ? 'var(--success)' : team.gd < 0 ? '#ef4444' : ''}">${team.gd}</td>
+                        <td style="color:var(--accent); font-weight:bold;">${team.pts}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderScorers() {
+            const tbody = document.getElementById('scorers-tbody');
+            tbody.innerHTML = '';
+
+            if (state.scorers.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="color:var(--subtext)">لا يوجد هدافين مسجلين حتى الآن</td></tr>`;
+                return;
+            }
+
+            state.scorers.sort((a, b) => b.goals - a.goals);
+
+            state.scorers.forEach((s, i) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${i + 1}</strong></td>
+                        <td style="text-align:right; font-weight:bold;">${s.name}</td>
+                        <td>${s.team}</td>
+                        <td style="color:var(--accent); font-weight:bold">${s.goals}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function renderAll() {
+            renderMatches();
+            renderStandings();
+            renderScorers();
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
